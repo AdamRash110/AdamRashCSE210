@@ -43,4 +43,4 @@ public class ListingActivity : Activity
     }
 }
 
-"I don't know what's wrong here. Would love some feedback."
+I don't know what's wrong here. Would love some feedback.
