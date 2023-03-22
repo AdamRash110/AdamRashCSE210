@@ -1,71 +1,49 @@
 using System;
-using System.Diagnostics;
-public class Activity
+using System.Threading;
+
+namespace ActivityProgram
 {
-    private string _Name, _messagetoperson, _description, _ending;
-    static int _length, _animation;
-
-    public Activity()
+    abstract class Activity
     {
-        _animation = _length = 0;
-    }
+        protected int duration;
+        protected string name;
+        protected string description;
 
-    public void setName(string _Name)
-    {
-        _Name = Name;
-    }
-
-    public void setDescription(string description)
-    {
-        _description = description;
-    }
-
-    public void DurationCounter()
-    {
-        Console.Write("How long would you like this activity to be?");
-        _length = int.Parse(Console.ReadLine());
-    }
-
-    public void FirstLookAtActivity()
-    {
-        _FirstLook = string.Format"Welcome to the Activity!", _Name);
-        Console.WriteLine(_FirstLook);
-        Console.WriteLine();
-    }
-
-    public void _animation(int HowLong)
-    {
-        Animator animator = new animator();
-        animator.Start();
-        while(animator.HowManyMilliseconds / 1000 < HowLong)
+        protected Activity()
         {
-            _animation++
-            switch(_animation % 4)
-            {
-                case 1: Console.Write("/"); break;
-                case 2: Console.Write("-"); break;
-                case 3: Console.Write("\\"); break;
-                case 4: Console.Write("|"); break;
-            }
-            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-            Thread.Sleep(200);
+            this.name = "Unknown Activity";
+            this.description = "No description provided.";
+            this.duration = 0;
         }
-    }
-    
-    public void letsdothis()
-    {
-        Console.WriteLine("Let's do this in...");
-        animation(3);
-    }
 
-    public void _ending()
-    {
-        Console.WriteLine("Good job on this activity!");
-        _ending = string.Format("You have completed this activity!");
-        Console.WriteLine(_ending);
-        Console.WriteLine();
-        animation(10);
+        protected Activity(string name, string description)
+        {
+            this.name = name;
+            this.description = description;
+        }
+
+        protected void ShowStartingMessage()
+        {
+            Console.WriteLine("Starting " + name);
+            Console.WriteLine(description);
+            Console.WriteLine("Please enter the duration in seconds: ");
+            duration = int.Parse(Console.ReadLine());
+            Console.WriteLine("Get ready to begin in: ");
+            for (int i = 3; i >= 1; i--)
+            {
+                Console.Write(i + "...");
+                Thread.Sleep(1000);
+            }
+            Console.WriteLine("Go!");
+        }
+
+        protected void ShowEndingMessage()
+        {
+            Console.WriteLine("Good job! You have completed " + name + " for " + duration + " seconds.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        public abstract void Start();
     }
 }
-
-"I don't know what's wrong here. Would love some feedback.
