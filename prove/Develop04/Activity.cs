@@ -28,7 +28,7 @@ namespace ActivityProgram
             Console.WriteLine(description);
             Console.WriteLine("Please enter the duration in seconds: ");
             duration = int.Parse(Console.ReadLine());
-            Console.WriteLine("Get ready to begin in: ");
+            Console.WriteLine("Get ready to begin in:");
             for (int i = 3; i >= 1; i--)
             {
                 Console.Write(i + "...");

@@ -4,60 +4,57 @@ class Program
 {
     static void Main(string[] args)
     {
-        Entries entries1 = new Entries();
-        Journal journal1 = new Journal();
+        Journal journal = new Journal();
 
-        int userInput = -1;
-
-        while (userInput != 5)
+        List<string> prompts = new List<string>
         {
-            Console.WriteLine("\nWelcome to the Journal Program!");
-            Console.WriteLine("Please select one of the following choices");
-            Console.WriteLine("1. Write");
-            Console.WriteLine("2. Display");
-            Console.WriteLine("3. Load");
-            Console.WriteLine("4. Save");
+            "Who was the most interesting person I interacted with today?",
+            "What was the best part of my day?",
+            "How did I see the hand of the Lord in my life today?",
+            "What was the strongest emotion I felt today?",
+            "If I had one thing I could do over today, what would it be?"
+        };
+
+        bool running = true;
+        while (running)
+        {
+            Console.Clear();
+            Console.WriteLine("1. Write a new entry");
+            Console.WriteLine("2. Display the journal");
+            Console.WriteLine("3. Save the journal to a file");
+            Console.WriteLine("4. Load the journal from a file");
             Console.WriteLine("5. Quit");
-            userInput = int.Parse(Console.ReadLine());
 
-                if (userInput == 1)
-                {
-                    entries1.startProgram();
-                }
-                else if (userInput == 2)
-                {
-                    journal1.getEntry();
-                }
-                else if (userInput == 3)
-                {
-                    ConsoleWriteLine("Which file would you like to load?: ");
-                    string loadFile = Console.ReadLine() + ".txt";
-                    string[] lines = System.File.ReadAllLines(loadFile);
-                    Console.WriteLine(" ");
-                    Console.WriteLine("Journal Entry: ");
-                    foreach (string line in lines)
-                    {
-                        string[] entry = line.Split(",");
-                        string displayEntry = entry[0];
-                        Console.WriteLine(displayEntry);
-                    }
-                }
-
-                else if (userInput == 4)
-                {
-                    Console.WriteLine("What would you like to name your file?: ");
-                    string userFile = Console.ReadLine();
-                    string fileName = userFile + ".txt";
-                    using (StreamWriter outputFile = new StreamWriter(fileName))
-                    {
-                    "I wish I could get this to work, but I have no idea what I'm doing on this step. I would love some feedback.";
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Press any key to exit");
-                    Console.ReadKey();
-                }
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    Random rand = new Random();
+                    string prompt = prompts[rand.Next(prompts.Count)];
+                    journal.AddEntry(prompt);
+                    break;
+                case "2":
+                    journal.DisplayEntries();
+                    Console.ReadLine();
+                    break;
+                case "3":
+                    Console.WriteLine("Enter a filename:");
+                    string saveFilename = Console.ReadLine();
+                    journal.SaveToFile(saveFilename);
+                    break;
+                case "4":
+                    Console.WriteLine("Enter a filename:");
+                    string loadFilename = Console.ReadLine();
+                    journal.LoadFromFile(loadFilename);
+                    break;
+                case "5":
+                    running = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    Console.ReadLine();
+                    break;
+            }
         }
     }
 }

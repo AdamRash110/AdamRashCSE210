@@ -10,7 +10,7 @@ namespace ActivityProgram
             bool running = true;
             while (running)
             {
-                Console.WriteLine("Choose an activity: ");
+                Console.WriteLine("Choose an activity:");
                 Console.WriteLine("1. Breathing Exercise");
                 Console.WriteLine("2. Reflection Activity");
                 Console.WriteLine("3. Listing Activity");
@@ -28,7 +28,7 @@ namespace ActivityProgram
                         reflectionActivity.Start();
                         break;
                     case 3:
-                        ListingActivity listingActivity = ListingActivity();
+                        ListingActivity listingActivity = new ListingActivity();
                         listingActivity.Start();
                         break;
                     case 4:
@@ -41,4 +41,3 @@ namespace ActivityProgram
             }
         }
     }
-}
